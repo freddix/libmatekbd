@@ -1,11 +1,11 @@
 Summary:	MATE keyboard library
 Name:		libmatekbd
-Version:	1.6.2
-Release:	1
+Version:	1.8.0
+Release:	2
 License:	LGPL
 Group:		Libraries
-Source0:	http://pub.mate-desktop.org/releases/1.6/%{name}-%{version}.tar.xz
-# Source0-md5:	35880a6bc967ed3093e7c46a58958b1f
+Source0:	http://pub.mate-desktop.org/releases/1.8/%{name}-%{version}.tar.xz
+# Source0-md5:	e2d7c8ee6d5375ed923c2399eb63aeab
 URL:		http://wiki.mate-desktop.org/libmatekbd
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -40,6 +40,13 @@ The thing that should not be here.
 %prep
 %setup -q
 
+# kill mate-common deps
+%{__sed} -i -e '/MATE_COMPILE_WARNINGS.*/d'	\
+    -i -e '/MATE_MAINTAINER_MODE_DEFINES/d'	\
+    -i -e '/MATE_COMMON_INIT/d'			\
+    -i -e '/MATE_CXX_WARNINGS.*/d'		\
+    -i -e '/MATE_DEBUG_CHECK/d' configure.ac
+
 %build
 %{__intltoolize}
 %{__libtoolize}
@@ -59,7 +66,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__rm} $RPM_BUILD_ROOT%{_datadir}/MateConf/gsettings/*.convert
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
-%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/{ca@valencia,en@shaw}
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/{ca@valencia,cmn,en@shaw}
 
 %find_lang %{name} --with-mate --all-name
 
