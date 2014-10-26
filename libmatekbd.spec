@@ -1,7 +1,7 @@
 Summary:	MATE keyboard library
 Name:		libmatekbd
 Version:	1.8.0
-Release:	2
+Release:	3
 License:	LGPL
 Group:		Libraries
 Source0:	http://pub.mate-desktop.org/releases/1.8/%{name}-%{version}.tar.xz
